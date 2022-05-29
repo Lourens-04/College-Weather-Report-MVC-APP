@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WeatherReportsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City_Table">
+    <Key>
+      <PropertyRef Name="City" />
+    </Key>
+    <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="favourite_Table" Relationship="Self.FK__favourite___City__286302EC" FromRole="City_Table" ToRole="favourite_Table" />
+    <NavigationProperty Name="Forecast_Table" Relationship="Self.FK__Forecast_T__City__2B3F6F97" FromRole="City_Table" ToRole="Forecast_Table" />
+  </EntityType>
+  <EntityType Name="favourite_Table">
+    <Key>
+      <PropertyRef Name="favouriteID" />
+    </Key>
+    <Property Name="favouriteID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City_Table" Relationship="Self.FK__favourite___City__286302EC" FromRole="favourite_Table" ToRole="City_Table" />
+    <NavigationProperty Name="User_Table" Relationship="Self.FK__favourite__Usern__276EDEB3" FromRole="favourite_Table" ToRole="User_Table" />
+  </EntityType>
+  <EntityType Name="Forecast_Table">
+    <Key>
+      <PropertyRef Name="ForecastID" />
+    </Key>
+    <Property Name="ForecastID" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="MinTemp" Type="Int32" />
+    <Property Name="MaxTemp" Type="Int32" />
+    <Property Name="Precipitation" Type="Int32" />
+    <Property Name="Humidity" Type="Int32" />
+    <Property Name="WindSpeed" Type="Int32" />
+    <NavigationProperty Name="City_Table" Relationship="Self.FK__Forecast_T__City__2B3F6F97" FromRole="Forecast_Table" ToRole="City_Table" />
+  </EntityType>
+  <EntityType Name="User_Table">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="UserRole" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="favourite_Table" Relationship="Self.FK__favourite__Usern__276EDEB3" FromRole="User_Table" ToRole="favourite_Table" />
+  </EntityType>
+  <Association Name="FK__favourite___City__286302EC">
+    <End Role="City_Table" Type="Self.City_Table" Multiplicity="0..1" />
+    <End Role="favourite_Table" Type="Self.favourite_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_Table">
+        <PropertyRef Name="City" />
+      </Principal>
+      <Dependent Role="favourite_Table">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Forecast_T__City__2B3F6F97">
+    <End Role="City_Table" Type="Self.City_Table" Multiplicity="0..1" />
+    <End Role="Forecast_Table" Type="Self.Forecast_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_Table">
+        <PropertyRef Name="City" />
+      </Principal>
+      <Dependent Role="Forecast_Table">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__favourite__Usern__276EDEB3">
+    <End Role="User_Table" Type="Self.User_Table" Multiplicity="0..1" />
+    <End Role="favourite_Table" Type="Self.favourite_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_Table">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="favourite_Table">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WeatherReportsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="City_Table" EntityType="Self.City_Table" />
+    <EntitySet Name="favourite_Table" EntityType="Self.favourite_Table" />
+    <EntitySet Name="Forecast_Table" EntityType="Self.Forecast_Table" />
+    <EntitySet Name="User_Table" EntityType="Self.User_Table" />
+    <AssociationSet Name="FK__favourite___City__286302EC" Association="Self.FK__favourite___City__286302EC">
+      <End Role="City_Table" EntitySet="City_Table" />
+      <End Role="favourite_Table" EntitySet="favourite_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Forecast_T__City__2B3F6F97" Association="Self.FK__Forecast_T__City__2B3F6F97">
+      <End Role="City_Table" EntitySet="City_Table" />
+      <End Role="Forecast_Table" EntitySet="Forecast_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__favourite__Usern__276EDEB3" Association="Self.FK__favourite__Usern__276EDEB3">
+      <End Role="User_Table" EntitySet="User_Table" />
+      <End Role="favourite_Table" EntitySet="favourite_Table" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

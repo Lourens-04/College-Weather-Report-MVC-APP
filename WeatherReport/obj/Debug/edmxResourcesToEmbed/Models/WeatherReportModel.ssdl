@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WeatherReportsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="City_Table">
+    <Key>
+      <PropertyRef Name="City" />
+    </Key>
+    <Property Name="City" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="favourite_Table">
+    <Key>
+      <PropertyRef Name="favouriteID" />
+    </Key>
+    <Property Name="favouriteID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="255" />
+    <Property Name="City" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Forecast_Table">
+    <Key>
+      <PropertyRef Name="ForecastID" />
+    </Key>
+    <Property Name="ForecastID" Type="int" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="255" />
+    <Property Name="Date" Type="date" />
+    <Property Name="MinTemp" Type="int" />
+    <Property Name="MaxTemp" Type="int" />
+    <Property Name="Precipitation" Type="int" />
+    <Property Name="Humidity" Type="int" />
+    <Property Name="WindSpeed" Type="int" />
+  </EntityType>
+  <EntityType Name="User_Table">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" />
+    <Property Name="UserRole" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__favourite___City__286302EC">
+    <End Role="City_Table" Type="Self.City_Table" Multiplicity="0..1" />
+    <End Role="favourite_Table" Type="Self.favourite_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_Table">
+        <PropertyRef Name="City" />
+      </Principal>
+      <Dependent Role="favourite_Table">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__favourite__Usern__276EDEB3">
+    <End Role="User_Table" Type="Self.User_Table" Multiplicity="0..1" />
+    <End Role="favourite_Table" Type="Self.favourite_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_Table">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="favourite_Table">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Forecast_T__City__2B3F6F97">
+    <End Role="City_Table" Type="Self.City_Table" Multiplicity="0..1" />
+    <End Role="Forecast_Table" Type="Self.Forecast_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_Table">
+        <PropertyRef Name="City" />
+      </Principal>
+      <Dependent Role="Forecast_Table">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WeatherReportsModelStoreContainer">
+    <EntitySet Name="City_Table" EntityType="Self.City_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="favourite_Table" EntityType="Self.favourite_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Forecast_Table" EntityType="Self.Forecast_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Table" EntityType="Self.User_Table" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__favourite___City__286302EC" Association="Self.FK__favourite___City__286302EC">
+      <End Role="City_Table" EntitySet="City_Table" />
+      <End Role="favourite_Table" EntitySet="favourite_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__favourite__Usern__276EDEB3" Association="Self.FK__favourite__Usern__276EDEB3">
+      <End Role="User_Table" EntitySet="User_Table" />
+      <End Role="favourite_Table" EntitySet="favourite_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Forecast_T__City__2B3F6F97" Association="Self.FK__Forecast_T__City__2B3F6F97">
+      <End Role="City_Table" EntitySet="City_Table" />
+      <End Role="Forecast_Table" EntitySet="Forecast_Table" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<WeatherReport.Models.Forecast_Table>
+@{
+    ViewBag.Title = "Display";
+}
+<h2>Forecast</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            City
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Minimum temperature
+        </th>
+        <th>
+            Maximum temperature
+        </th>
+        <th>
+            Precipitation
+        </th>
+        <th>
+            Humidity
+        </th>
+        <th>
+            Wind speed
+        </th>
+        <th>
+            Weather
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+
+            <td>
+                @if (item.Date.HasValue)
+                {
+                    @item.Date.Value.ToString("d MMM yyyy")
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinTemp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxTemp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precipitation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Humidity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WindSpeed)
+            </td>
+
+            @if (Convert.ToUInt16(item.Precipitation) >= 80)
+            {
+                <td>
+                    <img src='https://cdn.pixabay.com/photo/2013/04/01/09/22/thunderstorm-98541_960_720.png' alt='tunder' style='width: 80px; height: 80px;'>
+                </td>
+            }
+            @if (Convert.ToInt32(item.Precipitation) >= 50 && Convert.ToInt32(item.Precipitation) <= 79)
+            {
+                <td>
+                    <img src='https://cdn.pixabay.com/photo/2013/04/01/09/22/rain-98538_960_720.png' alt='rain' style='width: 80px; height: 80px;'>
+                </td>
+            }
+            @if (Convert.ToInt32(item.Precipitation) >= 20 && Convert.ToInt32(item.Precipitation) <= 49)
+            {
+                <td>
+                    <img src='https://cdn.pixabay.com/photo/2013/04/01/09/22/warm-98534_960_720.png' alt='cloudy' style='width: 80px; height: 80px;'>
+                </td>
+            }
+            @if (Convert.ToInt32(item.Precipitation) <= 19)
+            {
+                <td>
+                    <img src='https://cdn.pixabay.com/photo/2013/04/01/09/22/warm-98532_960_720.png' alt='sunny' style='width: 80px; height: 80px;'>
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Back to Favourite Cities", "FavIndex")
+</div>
+
+<div>
+    @Html.ActionLink("Back to All Cities", "IndexAll")
+</div>
+

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WeatherReportsModelStoreContainer" CdmEntityContainer="WeatherReportsEntities">
+    <EntitySetMapping Name="City_Table">
+      <EntityTypeMapping TypeName="WeatherReportsModel.City_Table">
+        <MappingFragment StoreEntitySet="City_Table">
+          <ScalarProperty Name="City" ColumnName="City" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="favourite_Table">
+      <EntityTypeMapping TypeName="WeatherReportsModel.favourite_Table">
+        <MappingFragment StoreEntitySet="favourite_Table">
+          <ScalarProperty Name="favouriteID" ColumnName="favouriteID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="City" ColumnName="City" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Forecast_Table">
+      <EntityTypeMapping TypeName="WeatherReportsModel.Forecast_Table">
+        <MappingFragment StoreEntitySet="Forecast_Table">
+          <ScalarProperty Name="ForecastID" ColumnName="ForecastID" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="MinTemp" ColumnName="MinTemp" />
+          <ScalarProperty Name="MaxTemp" ColumnName="MaxTemp" />
+          <ScalarProperty Name="Precipitation" ColumnName="Precipitation" />
+          <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+          <ScalarProperty Name="WindSpeed" ColumnName="WindSpeed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Table">
+      <EntityTypeMapping TypeName="WeatherReportsModel.User_Table">
+        <MappingFragment StoreEntitySet="User_Table">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

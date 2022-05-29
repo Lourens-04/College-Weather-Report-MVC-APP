@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WeatherReport.Models.favourite_Table>
+
+@{
+    ViewBag.Title = "FavIndex";
+}
+
+<h2>Generate weather forecasts for your favourite city or cities</h2>
+<span style="color:red"> @ViewBag.Error</span>
+@using (Html.BeginForm())
+{
+    <table class="table">
+
+        <tr>
+            <th>
+                Select Dates
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                Start Date
+            </th>
+            <th>
+                @Html.TextBox("Start_Date", null, new { @class = "form-control", type = "date", @required = "true" })
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                End Date
+            </th>
+
+            <th>
+                @Html.TextBox("End_Date", null, new { @class = "form-control", type = "date" , @required = "true"})
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                Select City/Cities
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                Hold CTRL key on the keyboard to select multiple cities
+            </th>
+            <td>
+                @Html.ListBox("City", null, htmlAttributes: new { @class = "form-control", @required = "true" , @multiple = "true"})
+            </td>
+        </tr>
+    </table>
+
+    <td>
+        &nbsp
+        <input id="btnSubmit" type="submit" value="Generate" class="btn btn-default" item.City />
+        &nbsp
+    </td>
+}
